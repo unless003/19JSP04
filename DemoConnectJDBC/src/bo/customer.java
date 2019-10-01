@@ -45,8 +45,8 @@ public class customer {
 	public void setSALARY(double sALARY) {
 		SALARY = sALARY;
 	}
-	public String toString(int ID , String NAME , int AGE, String ADDRESS , double SALARY) {
-		return ID + NAME + AGE + ADDRESS +SALARY ;
+	public String toString() {
+		return this.ID + this.NAME + this.AGE + this.ADDRESS +this.SALARY ;
 		
 	}
 }
