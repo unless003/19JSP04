@@ -37,7 +37,7 @@ public class CustomerDAOImpl implements ICustomerDAO {
 	public void addCustomer(customer customer, Statement st) throws SQLException {
 		// TODO Auto-generated method stub
 		String sqlInsert = " insert into customer (ID, NAME , AGE , ADDRESS,SALARY)"
-				+ " values("+customer.getID()+","+"'"+customer.getNAME()+"'"+","+customer.getAGE()+","+"'"+customer.getADDRESS()+"'"+","+customer.getSALARY()+")";
+				+ " values("+customer.getID()+","+"'"+customer.getNAME().trim()+"'"+","+customer.getAGE()+","+"'"+customer.getADDRESS().trim()+"'"+","+customer.getSALARY()+")";
 		System.out.println("insert into query : "+sqlInsert);
 		st.executeUpdate(sqlInsert);
 	}
@@ -45,7 +45,7 @@ public class CustomerDAOImpl implements ICustomerDAO {
 	@Override
 	public void updateCustomer(customer customer, Statement st) throws SQLException {
 		// TODO Auto-generated method stub
-		String sqlUpdate = ("update customer "+" set  "+"'"+customer.getNAME()+"'"+","+customer.getAGE()+","+"'"+customer.getADDRESS()+"'"+","+customer.getSALARY()+"    "+" where "+customer.getID()+" ");
+		String sqlUpdate = ("update customer "+" set  "+"'"+customer.getNAME().trim()+"'"+","+customer.getAGE()+","+"'"+customer.getADDRESS().trim()+"'"+","+customer.getSALARY()+"    "+" where "+customer.getID()+" ");
 		System.out.println("Update query "+sqlUpdate);
 		st.executeUpdate(sqlUpdate);
 	}
@@ -65,7 +65,7 @@ public class CustomerDAOImpl implements ICustomerDAO {
 		List<customer> cts =new ArrayList<customer>();
 		String sqlFind= ("select ID,NAME,AGE,ADDRESS,SALARY from customer where NAME ='"+NAME + "'");
 		System.out.println("--------> "+sqlFind);
-ResultSet rs = st.executeQuery(sqlFind);
+		ResultSet rs = st.executeQuery(sqlFind);
 		
 		while(rs.next()) {
 			int ID =rs.getInt(1);
@@ -77,7 +77,15 @@ ResultSet rs = st.executeQuery(sqlFind);
 		cts.add(customer);
 	
 		}
-		System.out.println();
+		cts.stream().forEach(item -> {
+			System.out.println("Item: " + item.toString());
+		});
+		
+		for(int i = 0; i< cts.size(); i++) {
+			System.out.println("Item 2: " + cts.get(i).toString());
+		}
+		
+		System.out.println("----Below----");
 		return cts;
 	
 	}
